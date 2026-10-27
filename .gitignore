@@ -1,0 +1,23 @@
+# Gradle
+.gradle/
+build/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+out/
+
+# Java
+*.class
+
+# Logs
+*.log
+
+# Environment variables and secrets
+.env
+.env.*
+
+# System files
+.DS_Store
+Thumbs.db
