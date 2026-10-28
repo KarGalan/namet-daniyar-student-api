@@ -54,6 +54,13 @@ GET /api/students
 
 Returns a list of student records.
 
+### Count Students
+
+GET /api/students/count
+
+Returns the total number of students stored in PostgreSQL.
+Expected response: HTTP 200 OK with a numeric count.
+
 ### Get Student by ID
 
 GET /api/students/1
