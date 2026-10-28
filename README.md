@@ -1,4 +1,4 @@
-# Namet Daniyar Student API
+# Daniyar Namet Student API - Documentation Branch
 
 Student: Daniyar Namet
 Group: IT2-2312 SE
