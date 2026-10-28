@@ -1,0 +1,25 @@
+name: namet-daniyar-midterm-jenkins
+
+services:
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    image: namet-daniyar-midterm-jenkins:local
+    container_name: namet-daniyar-midterm-jenkins
+
+    restart: unless-stopped
+
+    ports:
+      - "127.0.0.1:8091:8080"
+
+    group_add:
+      - "${DOCKER_GID:?DOCKER_GID is required}"
+
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+
+volumes:
+  jenkins_home:
