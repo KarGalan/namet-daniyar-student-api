@@ -32,7 +32,7 @@ services:
 
   # Spring Boot REST API
   app:
-    image: namet-daniyar-student-api:v1.0-37056
+    image: namet-daniyar-student-api:v1.1-37056
 
     build:
       context: .
