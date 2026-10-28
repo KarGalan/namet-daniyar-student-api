@@ -42,7 +42,7 @@ Jenkinsfile
 Trigger: Poll SCM
 
 Schedule:
-H/2 * * * *
+H/30 * * * *
 
 Jenkins periodically checks GitHub for new commits
 in the main branch.
