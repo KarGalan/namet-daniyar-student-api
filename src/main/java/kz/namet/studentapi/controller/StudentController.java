@@ -43,8 +43,7 @@ public class StudentController {
         return repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
-                        "Student not found"
-                ));
+                        "Student not found"));
     }
 
     // UPDATE - Update student information
@@ -69,5 +68,11 @@ public class StudentController {
         repository.delete(student);
 
         return ResponseEntity.noContent().build();
+    }
+
+    // COUNT - Get total number of students
+    @GetMapping("/count")
+    public long countStudents() {
+        return repository.count();
     }
 }
