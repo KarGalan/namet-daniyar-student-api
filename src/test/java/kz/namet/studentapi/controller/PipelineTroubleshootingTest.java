@@ -20,10 +20,9 @@ class PipelineTroubleshootingTest {
         StudentController controller =
                 new StudentController(repository);
 
-        // Intentional test failure for DevOps Midterm Task 4.3
-        // Repository returns 2, but the test incorrectly expects 3.
+        // corrected
         assertEquals(
-                3L,
+                2L,
                 controller.countStudents(),
                 "Student count does not match expected value"
         );
