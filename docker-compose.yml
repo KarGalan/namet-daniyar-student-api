@@ -1,0 +1,71 @@
+
+name: namet-daniyar-student-api
+
+services:
+
+  # PostgreSQL database
+  postgres:
+    image: postgres:16-alpine
+    container_name: namet-daniyar-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: ${DB_NAME:?DB_NAME is required}
+      POSTGRES_USER: ${DB_USERNAME:?DB_USERNAME is required}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    networks:
+      - student_network
+
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"'
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+
+  # Spring Boot REST API
+  app:
+    image: namet-daniyar-student-api:v1.0-37056
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: namet-daniyar-student-api
+    restart: unless-stopped
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    ports:
+      - "127.0.0.1:8082:8080"
+
+    environment:
+      SERVER_PORT: "8080"
+
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_OPEN_IN_VIEW: "false"
+
+    networks:
+      - student_network
+
+
+volumes:
+  postgres_data:
+
+
+networks:
+  student_network:
+    driver: bridge
