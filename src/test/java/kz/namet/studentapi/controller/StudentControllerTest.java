@@ -106,4 +106,14 @@ class StudentControllerTest {
 
                 verify(repository).delete(student);
         }
+
+        @Test
+        void testCountStudents() {
+                when(repository.count()).thenReturn(2L);
+
+                long result = controller.countStudents();
+
+                assertEquals(2L, result);
+                verify(repository).count();
+        }
 }
